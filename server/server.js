@@ -37,7 +37,7 @@ process.on("uncaughtException", function (err) {
 
 //Server checkup
 app.get("/", (req, res) => {
-  res.send("Welcome to the Cefalo - Fullstack Web Developer Test API");
+  res.send("Welcome to the Test API");
 });
 
 //Route Initialize
