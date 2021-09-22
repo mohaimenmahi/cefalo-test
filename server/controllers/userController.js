@@ -34,7 +34,10 @@ exports.signUp = (req, res) => {
         }
       );
     } else {
-      res.status(status).json(errors);
+      res.status(status).json({
+        status: status,
+        msg: errors.msg,
+      });
     }
   });
 };
@@ -68,7 +71,10 @@ exports.logIn = (req, res) => {
         }
       );
     } else {
-      res.status(status).json(errors);
+      res.status(status).json({
+        status: status,
+        msg: errors.msg,
+      });
     }
   });
 };
