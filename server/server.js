@@ -25,7 +25,6 @@ mongoose
 
 app.use(express.static("public"));
 
-/*To avoid CORS issues we have to define cors options with this library. It must be placed before routing start*/
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
@@ -35,7 +34,7 @@ process.on("uncaughtException", function (err) {
   console.log("Node NOT Exiting...");
 });
 
-//Server checkup
+//Server checking
 app.get("/", (req, res) => {
   res.send("Welcome to the Test API");
 });
@@ -45,5 +44,4 @@ app.get("/", (req, res) => {
 app.use("/api/get", getRoute);
 app.use("/api/post", postRoute);
 
-//This on use fr socket enable on client side
 app.listen(port, () => console.log(`Server is up into port ${port}`));
