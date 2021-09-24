@@ -15,6 +15,7 @@ mongoose
   .connect(process.env.CLOUD_DB_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
+    useCreateIndex: true,
   })
   .then(() => {
     console.log("Connected via mongoose");

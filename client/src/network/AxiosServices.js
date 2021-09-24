@@ -8,7 +8,7 @@ function getIRequestProp() {
   return {
     serverUrl: serverUrl,
     requestHeader: {
-      "Content-Type": "application/json, multipart/form-data",
+      "Content-Type": "application/json",
       Authorization: `JWT ${authToken}`,
     },
   };

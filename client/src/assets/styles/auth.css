@@ -1,0 +1,29 @@
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  min-width: 350px;
+}
+
+.button-class {
+  text-align: center;
+  margin-top: 10px !important;
+}
+
+.sign-link {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.auth-success {
+  color: green;
+}
+
+.auth-err {
+  color: red;
+}
+
+@media (max-width: 399px) {
+  .auth-form {
+    min-width: 200px;
+  }
+}

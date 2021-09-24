@@ -29,8 +29,8 @@ export default function authReducer(state = initState, action) {
         ...state,
         authLoading: false,
         authErr: null,
-        token: action.token,
-        authData: action.data,
+        token: action.result.token,
+        authData: action.result.data,
       };
 
     case AUTH.SET_SIGN_UP.FAILURE:
@@ -50,12 +50,13 @@ export default function authReducer(state = initState, action) {
       };
 
     case AUTH.SET_LOGIN.SUCCESS:
+      localStorage.setItem("authToken", action.token);
       return {
         ...state,
         authLoading: false,
         authErr: null,
-        token: action.token,
-        authData: action.data,
+        token: action.result.token,
+        authData: action.result.data,
       };
 
     case AUTH.SET_LOGIN.FAILURE:
@@ -73,6 +74,12 @@ export default function authReducer(state = initState, action) {
         ...state,
         token: null,
         authData: null,
+        authErr: null,
+      };
+
+    case AUTH.CLEAR_MSG:
+      return {
+        ...state,
         authErr: null,
       };
 

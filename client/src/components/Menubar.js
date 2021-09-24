@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState, useEffect } from "react";
 import { styled, alpha } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -9,16 +9,25 @@ import InputBase from "@mui/material/InputBase";
 import Badge from "@mui/material/Badge";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
-import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
-import AccountCircle from "@mui/icons-material/AccountCircle";
-import MailIcon from "@mui/icons-material/Mail";
-import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
 
-export default function PrimarySearchAppBar() {
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+import { fetchProducts, searchResult } from "../redux/actions/home";
+import { getWishlist } from "../redux/actions/wishlist";
+import { openModal } from "../redux/actions/auth";
+
+import { connect } from "react-redux";
+
+import "../assets/styles/menubar.css";
+
+const MenuBar = (props) => {
+  let { token, fetchProducts, searchResult, getWishlist, openModal } = props;
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
+
+  let handleLogin = () => {
+    openModal("login");
+  };
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -80,60 +89,34 @@ export default function PrimarySearchAppBar() {
       onClose={handleMobileMenuClose}
     >
       <MenuItem>
-        <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-          <Badge badgeContent={4} color="error">
-            <MailIcon />
-          </Badge>
-        </IconButton>
-        <p>Messages</p>
+        <p>Products</p>
       </MenuItem>
-      <MenuItem>
-        <IconButton
-          size="large"
-          aria-label="show 17 new notifications"
-          color="inherit"
-        >
-          <Badge badgeContent={17} color="error">
-            <NotificationsIcon />
-          </Badge>
-        </IconButton>
-        <p>Notifications</p>
-      </MenuItem>
-      <MenuItem onClick={handleProfileMenuOpen}>
-        <IconButton
-          size="large"
-          aria-label="account of current user"
-          aria-controls="primary-search-account-menu"
-          aria-haspopup="true"
-          color="inherit"
-        >
-          <AccountCircle />
-        </IconButton>
-        <p>Profile</p>
+      {token ? (
+        <MenuItem>
+          <p>Wishlist</p>
+        </MenuItem>
+      ) : null}
+      <MenuItem onClick={handleLogin}>
+        <p>Login</p>
       </MenuItem>
     </Menu>
   );
+
+  useEffect(() => {
+    fetchProducts();
+  }, []);
 
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="open drawer"
-            sx={{ mr: 2 }}
-          >
-            <MenuIcon />
-          </IconButton>
           <Typography
             variant="h6"
             noWrap
             component="div"
             sx={{ display: { xs: "none", sm: "block" } }}
           >
-            MUI
+            E-COMMERCE
           </Typography>
           <Search>
             <SearchIconWrapper>
@@ -144,41 +127,42 @@ export default function PrimarySearchAppBar() {
               inputProps={{ "aria-label": "search" }}
             />
           </Search>
-          <Box sx={{ flexGrow: 1 }} />
-          <Box sx={{ display: { xs: "none", md: "flex" } }}>
+          <Box sx={{ flexGrow: { sm: 1 } }} />
+          <Box className="nav">
             <IconButton
-              size="large"
+              size="small"
               aria-label="show 4 new mails"
               color="inherit"
             >
-              <Badge badgeContent={4} color="error">
-                <MailIcon />
-              </Badge>
+              Products
             </IconButton>
+            {token ? (
+              <IconButton
+                size="small"
+                aria-label="show 17 new notifications"
+                color="inherit"
+              >
+                <Badge badgeContent={17} color="error">
+                  Wishlist
+                </Badge>
+              </IconButton>
+            ) : null}
+
             <IconButton
-              size="large"
-              aria-label="show 17 new notifications"
-              color="inherit"
-            >
-              <Badge badgeContent={17} color="error">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
-            <IconButton
-              size="large"
+              size="small"
               edge="end"
               aria-label="account of current user"
               aria-controls={menuId}
               aria-haspopup="true"
-              onClick={handleProfileMenuOpen}
+              onClick={handleLogin}
               color="inherit"
             >
-              <AccountCircle />
+              Login
             </IconButton>
           </Box>
           <Box sx={{ display: { xs: "flex", md: "none" } }}>
             <IconButton
-              size="large"
+              size="small"
               aria-label="show more"
               aria-controls={mobileMenuId}
               aria-haspopup="true"
@@ -194,7 +178,7 @@ export default function PrimarySearchAppBar() {
       {renderMenu}
     </Box>
   );
-}
+};
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -231,7 +215,24 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     transition: theme.transitions.create("width"),
     width: "100%",
     [theme.breakpoints.up("md")]: {
-      width: "20ch",
+      width: "60ch",
     },
   },
 }));
+
+let mapStateToProps = (state) => {
+  return {
+    token: state.authReducer.token,
+  };
+};
+
+let mapDispatchToProps = (dispatch) => {
+  return {
+    fetchProducts: () => dispatch(fetchProducts()),
+    getWishlist: () => dispatch(getWishlist()),
+    searchResult: (data) => dispatch(searchResult(data)),
+    openModal: (data) => dispatch(openModal(data)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(MenuBar);

@@ -26,3 +26,9 @@ export function logOut() {
     type: AUTH.LOGOUT_USER,
   };
 }
+
+export function clearAuthMsg() {
+  return {
+    type: AUTH.CLEAR_MSG,
+  };
+}

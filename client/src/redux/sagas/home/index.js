@@ -7,12 +7,11 @@ function* fetchProducts(actions) {
   try {
     let result = yield call(AxiosServices.get, ApiServices.FETCH_PRODUCT, null);
 
-    yield put({ type: HOME.FETCH_PRODUCTS.SUCCESS, result: result.data });
+    yield put({ type: HOME.FETCH_PRODUCTS.SUCCESS, result: result.data.data });
   } catch (err) {
-    console.log("Error", err.response);
     yield put({
       type: HOME.FETCH_PRODUCTS.FAILURE,
-      result: err.response.data,
+      result: err.response.data.msg,
     });
   }
 }
@@ -25,11 +24,11 @@ function* searchResult(actions) {
       actions.data
     );
 
-    yield put({ type: HOME.SEARCH_PRODUCTS.SUCCESS, result: result.data });
+    yield put({ type: HOME.SEARCH_PRODUCTS.SUCCESS, result: result.data.data });
   } catch (err) {
     yield put({
       type: HOME.SEARCH_PRODUCTS.FAILURE,
-      result: err.response.data,
+      result: err.response.data.msg,
     });
   }
 }

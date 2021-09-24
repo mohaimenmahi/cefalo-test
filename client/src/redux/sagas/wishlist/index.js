@@ -16,10 +16,9 @@ function* getWishlist(actions) {
       result: result.data,
     });
   } catch (err) {
-    console.log("Get Wishlist err", err.response);
     yield put({
       type: WISHLIST.FETCH_WISHLIST.FAILURE,
-      result: err.response.data,
+      result: err.response.data.msg,
     });
   }
 }
@@ -34,12 +33,12 @@ function* addWishlist(actions) {
 
     yield put({
       type: WISHLIST.ADD_WISHLIST.SUCCESS,
-      result: result.data,
+      result: result.data.data,
     });
   } catch (err) {
     yield put({
       type: WISHLIST.ADD_WISHLIST.FAILURE,
-      result: err.response.data,
+      result: err.response.data.msg,
     });
   }
 }
@@ -54,12 +53,12 @@ function* removeWishlist(actions) {
 
     yield put({
       type: WISHLIST.REMOVE_WISHLIST.SUCCESS,
-      result: result.data,
+      result: result.data.data,
     });
   } catch (err) {
     yield put({
       type: WISHLIST.REMOVE_WISHLIST.FAILURE,
-      result: err.response.data,
+      result: err.response.data.msg,
     });
   }
 }
@@ -74,12 +73,12 @@ function* clearWishlist(actions) {
 
     yield put({
       type: WISHLIST.CLEAR_WISHLIST.SUCCESS,
-      result: result.data,
+      result: result.data.data,
     });
   } catch (err) {
     yield put({
       type: WISHLIST.CLEAR_WISHLIST.FAILURE,
-      result: err.response.data,
+      result: err.response.data.msg,
     });
   }
 }

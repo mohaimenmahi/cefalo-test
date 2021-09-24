@@ -1,0 +1,12 @@
+.nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-left: 5%,
+}
+
+@media (max-width: 899px) {
+  .nav {
+    display: none;
+  }
+}
