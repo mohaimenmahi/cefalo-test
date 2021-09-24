@@ -4,7 +4,6 @@ import { persistStore, persistReducer } from "redux-persist";
 import localforage from "localforage";
 import rootReducer from "../redux/reducers";
 import rootSaga from "../redux/sagas";
-import thunk from "redux-thunk";
 
 const persistConfig = {
   key: "root",
@@ -24,7 +23,7 @@ export default function configureStore() {
 
   const sagaMiddleware = createSagaMiddleware();
 
-  const middlewares = [sagaMiddleware, thunk];
+  const middlewares = [sagaMiddleware];
 
   const enhancers = [applyMiddleware(...middlewares)];
 

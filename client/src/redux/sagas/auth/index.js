@@ -18,6 +18,7 @@ function* signUp(actions) {
   } catch (err) {
     yield put({
       type: AUTH.SET_SIGN_UP.FAILURE,
+      result: err.response.data,
     });
   }
 }

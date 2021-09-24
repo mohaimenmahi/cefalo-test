@@ -1,4 +1,5 @@
 const Wishlist = require("../models/Wishlist");
+const Products = require("../models/Products");
 
 const passport = require("passport");
 require("../middleware/passport")(passport);
@@ -26,17 +27,30 @@ exports.getAll = (req, res) => {
 
 exports.addWishlistItem = (req, res) => {
   if (req.user) {
-    Wishlist.addToWishlist(req.body, req.user._id, (status, error, addData) => {
-      if (status === 200) {
-        res.json({
-          status: 200,
-          data: addData,
-          msg: "Item Added to wishlist successfully",
-        });
+    Products.checkProduct(req.body, (proStatus, proErr, proData) => {
+      if (proStatus === 200) {
+        Wishlist.addToWishlist(
+          req.body,
+          req.user._id,
+          (status, error, addData) => {
+            if (status === 200) {
+              res.json({
+                status: 200,
+                data: addData,
+                msg: "Item Added to wishlist successfully",
+              });
+            } else {
+              res.status(status).json({
+                status: status,
+                msg: error.msg,
+              });
+            }
+          }
+        );
       } else {
-        res.status(status).json({
-          status: status,
-          msg: error.msg,
+        res.status(proStatus).json({
+          status: proStatus,
+          msg: proErr.msg,
         });
       }
     });

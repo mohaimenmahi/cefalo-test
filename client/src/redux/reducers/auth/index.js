@@ -24,6 +24,7 @@ export default function authReducer(state = initState, action) {
       };
 
     case AUTH.SET_SIGN_UP.SUCCESS:
+      localStorage.setItem("authToken", action.token);
       return {
         ...state,
         authLoading: false,
@@ -67,6 +68,7 @@ export default function authReducer(state = initState, action) {
       };
 
     case AUTH.LOGOUT_USER:
+      localStorage.clear();
       return {
         ...state,
         token: null,

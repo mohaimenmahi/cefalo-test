@@ -1,13 +1,15 @@
 import axios from "axios";
 import config from "../config";
 
+const authToken = localStorage.getItem("authToken");
+
 function getIRequestProp() {
   let serverUrl = config.BASE_URL;
   return {
     serverUrl: serverUrl,
     requestHeader: {
       "Content-Type": "application/json, multipart/form-data",
-      Authorization: `JWT `,
+      Authorization: `JWT ${authToken}`,
     },
   };
 }
@@ -27,32 +29,7 @@ async function post(url, body) {
   });
 }
 
-async function put(url, body) {
-  let { serverUrl, requestHeader } = getIRequestProp();
-  return await axios.put(serverUrl + url, body, {
-    headers: requestHeader,
-  });
-}
-
-async function patch(url, body) {
-  let { serverUrl, requestHeader } = getIRequestProp();
-  return await axios.patch(serverUrl + url, body, {
-    headers: requestHeader,
-  });
-}
-
-async function remove(url, body) {
-  let { serverUrl, requestHeader } = getIRequestProp();
-  return await axios.delete(serverUrl + url, {
-    data: body,
-    headers: requestHeader,
-  });
-}
-
 export const AxiosServices = {
   get,
   post,
-  put,
-  patch,
-  remove,
 };

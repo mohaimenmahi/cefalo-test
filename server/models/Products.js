@@ -21,6 +21,23 @@ const productSchema = new Schema({
   },
 });
 
+productSchema.statics.checkProduct = async (data, cb) => {
+  try {
+    let isProduct = await Products.findOne({
+      _id: data.productId,
+      status: true,
+    });
+
+    if (isProduct) {
+      return cb(200, null, data);
+    } else {
+      return cb(404, { msg: "Product is not available" }, null);
+    }
+  } catch (err) {
+    return cb(500, { msg: "Internal server error" }, null);
+  }
+};
+
 productSchema.statics.addProduct = async (data, cb) => {
   try {
     let isValid = validAddProduct(data);
