@@ -1,16 +1,27 @@
 import React from "react";
 import { connect } from "react-redux";
 import ProductCard from "../../components/ProductCard";
+import { useLocation } from "react-router-dom";
+
 import "../../assets/styles/home.css";
 
-const Home = (props) => {
-  let { allProducts, loading, wishlist } = props;
-  let products = allProducts ? allProducts : [];
+function useQuery() {
+  return new URLSearchParams(useLocation().search);
+}
+
+const Search = (props) => {
+  let { searchResult, loading, wishlist } = props;
+
+  let query = useQuery();
+
+  let text = query.get("text");
+  let products = searchResult ? searchResult : [];
   return (
     <div className="main">
+      <h4 className="heading">Search Result of {text}</h4>
       {loading ? (
         "Loading..."
-      ) : (
+      ) : products.length ? (
         <div className="product-list">
           {products.map((item) => {
             return (
@@ -20,6 +31,8 @@ const Home = (props) => {
             );
           })}
         </div>
+      ) : (
+        `No products found for ${text}`
       )}
     </div>
   );
@@ -27,10 +40,10 @@ const Home = (props) => {
 
 let stateToProps = (state) => {
   return {
-    allProducts: state.homeReducer.allProducts,
-    loading: state.homeReducer.allProductLoading,
+    searchResult: state.homeReducer.searchResult,
+    loading: state.homeReducer.searchLoading,
     wishlist: state.wishlistReducer.wishlist,
   };
 };
 
-export default connect(stateToProps)(Home);
+export default connect(stateToProps)(Search);

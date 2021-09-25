@@ -1,8 +1,21 @@
+.main-box {
+  flex-grow: 1;
+  position: fixed;
+  z-index: 999;
+  top: 0;
+  width: 100%;      
+}
+
 .nav {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   margin-left: 5%,
+}
+
+.nav-text {
+  margin: 8px 0;
+  font-size: 14px;
 }
 
 @media (max-width: 899px) {

@@ -1,0 +1,30 @@
+.main {
+  margin-top: 80px;
+  padding: 0 10%;
+}
+
+.product-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.card-single {
+  margin: 20px;
+}
+
+@media (max-width: 949px) {
+  .main {
+    padding: 0 5%;
+  }
+} 
+
+@media (max-width: 399px) {
+  .main {
+    padding: 0;
+  }
+
+  .card-single {
+    margin: 12px;
+  }
+}

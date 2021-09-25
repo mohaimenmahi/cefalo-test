@@ -30,7 +30,7 @@ export default function authReducer(state = initState, action) {
         authLoading: false,
         authErr: null,
         token: action.result.token,
-        authData: action.result.data,
+        authData: action.result.user,
       };
 
     case AUTH.SET_SIGN_UP.FAILURE:
@@ -56,7 +56,7 @@ export default function authReducer(state = initState, action) {
         authLoading: false,
         authErr: null,
         token: action.result.token,
-        authData: action.result.data,
+        authData: action.result.user,
       };
 
     case AUTH.SET_LOGIN.FAILURE:
