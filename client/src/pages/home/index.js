@@ -3,7 +3,12 @@ import styled from "styled-components";
 import { connect } from "react-redux";
 
 const Home = (props) => {
-  return <StyledHome>This is home</StyledHome>;
+  let { allProducts, loading } = props;
+  return (
+    <StyledHome>
+      {loading ? "Loading.." : `Total Products: ${allProducts.length}`}
+    </StyledHome>
+  );
 };
 
 const StyledHome = styled.div`
@@ -11,4 +16,11 @@ const StyledHome = styled.div`
   padding: 0 10%;
 `;
 
-export default Home;
+let stateToProps = (state) => {
+  return {
+    allProducts: state.homeReducer.allProducts,
+    loading: state.homeReducer.allProductLoading,
+  };
+};
+
+export default connect(stateToProps)(Home);
