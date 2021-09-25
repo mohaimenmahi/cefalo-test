@@ -71,11 +71,20 @@ productSchema.statics.updateProduct = async (data, cb) => {
   try {
     let isValid = validUpdate(data);
     if (isValid.status) {
+      let updateObj = {};
+
+      if (data.name) updateObj["name"] = data.name;
+      if (data.description) updateObj["description"] = data.description;
+      if (data.status === true || data.status === false)
+        updateObj["status"] = data.status;
+
       let updateProduct = await Products.updateOne(
         {
           _id: data._id,
         },
-        { $set: { name: data.name, description: data.description } }
+        {
+          $set: updateObj,
+        }
       );
 
       if (updateProduct) {

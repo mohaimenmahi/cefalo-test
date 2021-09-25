@@ -8,10 +8,13 @@ exports.getAll = (req, res) => {
   if (req.user) {
     Wishlist.getAllWishlist(req.user._id, (status, error, allData) => {
       if (status === 200) {
+        let filtered = allData.length
+          ? allData.filter((item) => item.productId)
+          : [];
         res.json({
           status: 200,
-          data: allData,
-          msg: allData.length ? "Wishlist Fetched" : "No Items in Wishlist",
+          data: filtered,
+          msg: filtered.length ? "Wishlist Fetched" : "No Items in Wishlist",
         });
       } else {
         res.status(status).json({

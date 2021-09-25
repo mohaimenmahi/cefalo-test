@@ -53,6 +53,7 @@ wishlistSchema.statics.getAllWishlist = async (userId, cb) => {
   try {
     let allItems = await Wishlist.find({ userId: userId }).populate({
       path: "productId",
+      match: { status: true },
     });
 
     if (allItems) {

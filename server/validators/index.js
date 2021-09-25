@@ -110,7 +110,7 @@ const validUpdate = (data) => {
     status: true,
   };
 
-  let isName = /\S/.test(data.name);
+  let isName = data.name ? /\S/.test(data.name) : true;
   if (!isName) {
     valid.msg = "Product Name cannot be empty";
     valid.status = false;
@@ -118,7 +118,7 @@ const validUpdate = (data) => {
     return valid;
   }
 
-  let isDesc = /\S/.test(data.description);
+  let isDesc = data.description ? /\S/.test(data.description) : true;
   if (!isDesc) {
     valid.msg = "";
     valid.status = false;
