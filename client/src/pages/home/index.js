@@ -6,6 +6,7 @@ const Home = (props) => {
   let { allProducts, loading } = props;
   return (
     <StyledHome>
+      Welcome to E-Commerce
       {loading ? "Loading.." : `Total Products: ${allProducts.length}`}
     </StyledHome>
   );
