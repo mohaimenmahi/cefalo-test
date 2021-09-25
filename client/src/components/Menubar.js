@@ -219,7 +219,7 @@ const MenuBar = (props) => {
                 onClick={handleLogin}
                 color="inherit"
               >
-                Login
+                <h4 className="nav-text">Login</h4>
               </IconButton>
             )}
           </Box>
