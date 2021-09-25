@@ -25,7 +25,7 @@ const MenuBar = (props) => {
   let {
     token,
     fetchProducts,
-    searchResult,
+    wishlist,
     getWishlist,
     authData,
     openModal,
@@ -34,6 +34,8 @@ const MenuBar = (props) => {
   } = props;
 
   let history = useHistory();
+
+  let wishLen = wishlist ? wishlist.length : 0;
 
   const [anchorEl, setAnchorEl] = useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
@@ -50,10 +52,6 @@ const MenuBar = (props) => {
 
   let handleSearch = (e) => {
     e.preventDefault();
-    let data = {
-      key: searchText,
-    };
-    searchResult(data);
     history.push("/search?text=" + searchText);
   };
 
@@ -81,9 +79,24 @@ const MenuBar = (props) => {
     fetchProducts();
   }, []);
 
+  useEffect(() => {
+    if (token) {
+      getWishlist();
+    }
+  }, [token]);
+
   let handleLogout = () => {
     logOut();
     clearLogout();
+    handleMenuClose();
+  };
+
+  let handleRoute = (path) => {
+    history.push(`/${path}`);
+  };
+
+  let handleMoble = (path) => {
+    handleRoute(path);
     handleMenuClose();
   };
 
@@ -125,12 +138,12 @@ const MenuBar = (props) => {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem>
+      <MenuItem onClick={() => handleMoble("")}>
         <p>Products</p>
       </MenuItem>
       {token ? (
-        <MenuItem>
-          <p>Wishlist</p>
+        <MenuItem onClick={() => handleMoble("wishlist")}>
+          <p>Wishlist {wishLen ? `(${wishLen})` : ""}</p>
         </MenuItem>
       ) : null}
       {token ? (
@@ -177,19 +190,22 @@ const MenuBar = (props) => {
           </form>
           <Box sx={{ flexGrow: 1 }} />
           <Box className="nav">
-            <Link to="/" style={{ textDecoration: "none", color: "white" }}>
-              <IconButton
-                size="small"
-                aria-label="show 4 new mails"
-                color="inherit"
-              >
-                <h4 className="nav-text">Products</h4>
-              </IconButton>
-            </Link>
+            <IconButton
+              size="small"
+              aria-label="show 4 new mails"
+              color="inherit"
+              onClick={() => handleRoute("")}
+            >
+              <h4 className="nav-text">Products</h4>
+            </IconButton>
 
             {token ? (
-              <IconButton size="small" color="inherit">
-                <Badge badgeContent={2} color="error">
+              <IconButton
+                size="small"
+                color="inherit"
+                onClick={() => handleRoute("wishlist")}
+              >
+                <Badge badgeContent={wishLen} color="error">
                   <h4 className="nav-text">Wishlist</h4>
                 </Badge>
               </IconButton>
@@ -287,6 +303,7 @@ let mapStateToProps = (state) => {
   return {
     token: state.authReducer.token,
     authData: state.authReducer.authData,
+    wishlist: state.wishlistReducer.wishlist,
   };
 };
 

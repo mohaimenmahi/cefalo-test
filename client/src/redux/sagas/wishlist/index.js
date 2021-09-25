@@ -13,7 +13,7 @@ function* getWishlist(actions) {
 
     yield put({
       type: WISHLIST.FETCH_WISHLIST.SUCCESS,
-      result: result.data,
+      result: result.data.data,
     });
   } catch (err) {
     yield put({

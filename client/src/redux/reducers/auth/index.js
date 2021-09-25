@@ -24,7 +24,7 @@ export default function authReducer(state = initState, action) {
       };
 
     case AUTH.SET_SIGN_UP.SUCCESS:
-      localStorage.setItem("authToken", action.token);
+      localStorage.setItem("authToken", action.result.token);
       return {
         ...state,
         authLoading: false,
@@ -50,7 +50,7 @@ export default function authReducer(state = initState, action) {
       };
 
     case AUTH.SET_LOGIN.SUCCESS:
-      localStorage.setItem("authToken", action.token);
+      localStorage.setItem("authToken", action.result.token);
       return {
         ...state,
         authLoading: false,
