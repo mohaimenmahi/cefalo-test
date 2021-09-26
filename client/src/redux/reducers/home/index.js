@@ -53,6 +53,7 @@ export default function homeReducer(state = initState, action) {
         ...state,
         searchLoading: false,
         searchErr: action.result,
+        searchResult: [],
       };
 
     default:

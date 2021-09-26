@@ -13,6 +13,8 @@ import { openModal } from "../redux/actions/auth";
 
 import { connect } from "react-redux";
 
+import "../assets/styles/home.css";
+
 const ProductCard = (props) => {
   let { product, token, openModal, addWishlist, isListed, removeWishlist } =
     props;
@@ -45,7 +47,7 @@ const ProductCard = (props) => {
   };
 
   return (
-    <Card sx={{ width: 340, height: "100%" }}>
+    <Card className="product-card">
       <CardActionArea sx={{ cursor: "alias" }}>
         <CardMedia
           component="img"

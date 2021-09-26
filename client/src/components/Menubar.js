@@ -52,7 +52,11 @@ const MenuBar = (props) => {
 
   let handleSearch = (e) => {
     e.preventDefault();
-    history.push("/search?text=" + searchText);
+    let checkText = /\S/.test(searchText);
+    console.log("Checktexct", checkText);
+    if (checkText) {
+      history.push("/search?text=" + searchText);
+    }
   };
 
   const isMenuOpen = Boolean(anchorEl);
@@ -169,12 +173,12 @@ const MenuBar = (props) => {
               variant="h6"
               noWrap
               component="div"
-              sx={{ display: { xs: "none", sm: "block" } }}
+              sx={{ fontSize: { xs: 12, sm: 16 } }}
             >
               E-COMMERCE
             </Typography>
           </Link>
-          <form onSubmit={handleSearch}>
+          <form className="search-form" onSubmit={handleSearch}>
             <Search>
               <SearchIconWrapper>
                 <SearchIcon />

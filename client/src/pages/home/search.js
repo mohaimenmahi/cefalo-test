@@ -19,30 +19,37 @@ const Search = (props) => {
   let text = query.get("text");
 
   useEffect(() => {
-    let data = {
-      key: text,
-    };
-    searchResult(data);
-  }, []);
+    let newText = text.trim();
+    let checkText = /\S/.test(newText);
+    if (checkText) {
+      let data = {
+        key: newText,
+      };
+      searchResult(data);
+    }
+  }, [text]);
 
   let products = searchData ? searchData : [];
+
   return (
     <div className="main">
-      <h4 className="heading">Search Result of {text}</h4>
       {loading ? (
         <div className="heading">Loading...</div>
       ) : products.length ? (
-        <div className="product-list">
-          {products.map((item) => {
-            return (
-              <div className="card-single">
-                <ProductCard product={item} />
-              </div>
-            );
-          })}
-        </div>
+        <>
+          <h4 className="heading">Search Result of {text}</h4>
+          <div className="product-list">
+            {products.map((item) => {
+              return (
+                <div className="card-single">
+                  <ProductCard product={item} />
+                </div>
+              );
+            })}
+          </div>
+        </>
       ) : (
-        <h4 className="heading">`No products found for ${text}`</h4>
+        <h4 className="heading">No products found for {text}</h4>
       )}
     </div>
   );

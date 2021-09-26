@@ -18,6 +18,11 @@
   font-size: 14px;
 }
 
+.search-form {
+  width: 60%;
+  margin-left: 20px;
+}
+
 @media (max-width: 899px) {
   .nav {
     display: none;
