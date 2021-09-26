@@ -1,5 +1,7 @@
 # cefalo-test
 
+Live Link: https://fwd-cec.netlify.app/
+
 Frontend Directory: /client
 
 Backend Directory: /server
