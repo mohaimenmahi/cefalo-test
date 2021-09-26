@@ -25,18 +25,18 @@ This application is developed by using MERN stack. Here is the detail overview o
 
 Forntend:
 
-  -Frontend Library: ReactJs
-  -UI Library: Material UI
-  -State Management: React Redux
-  -Redux Middleware: Redux Saga
+  - ReactJs
+  - Material UI
+  - React Redux
+  - Redux Saga
   
 Backend:
 
-  -Backed Environment: NodeJs
-  -Middleware: Express
-  -Database: MongoDB
-  -Database ODM: Mongoose
-  -CDN for Images: Cloudinary
-  -Database Cloud: MongoDB Atlas
+  - Backed Environment: NodeJs
+  - Middleware: Express
+  - Database: MongoDB
+  - Database ODM: Mongoose
+  - CDN for Images: Cloudinary
+  - Database Cloud: MongoDB Atlas
 
 
