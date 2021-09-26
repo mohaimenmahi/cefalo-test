@@ -37,11 +37,23 @@ exports.addWishlistItem = (req, res) => {
           req.user._id,
           (status, error, addData) => {
             if (status === 200) {
-              res.json({
-                status: 200,
-                data: addData,
-                msg: "Item Added to wishlist successfully",
-              });
+              Wishlist.getAllWishlist(
+                req.user._id,
+                (allStatus, allError, allData) => {
+                  if (allStatus === 200) {
+                    res.json({
+                      status: 200,
+                      data: allData,
+                      msg: "Item Added to wishlist successfully",
+                    });
+                  } else {
+                    res.status(allStatus).json({
+                      status: allStatus,
+                      msg: allError.msg,
+                    });
+                  }
+                }
+              );
             } else {
               res.status(status).json({
                 status: status,
@@ -66,11 +78,23 @@ exports.removeWishlistItem = (req, res) => {
   if (req.user) {
     Wishlist.removeFromWishlist(req.body, (status, error, data) => {
       if (status === 200) {
-        res.json({
-          status: 200,
-          data: data,
-          msg: "Item deleted from wishlist successfully",
-        });
+        Wishlist.getAllWishlist(
+          req.user._id,
+          (allStatus, allError, allData) => {
+            if (allStatus === 200) {
+              res.json({
+                status: 200,
+                data: allData,
+                msg: "Item deleted from wishlist successfully",
+              });
+            } else {
+              res.status(allStatus).json({
+                status: allStatus,
+                msg: allError.msg,
+              });
+            }
+          }
+        );
       } else {
         res.status(status).json({
           status: status,
