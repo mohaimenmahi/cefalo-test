@@ -1,6 +1,7 @@
 # cefalo-test
 
 Frontend Directory: /client
+
 Backend Directory: /server
 
 # Installation and setup
