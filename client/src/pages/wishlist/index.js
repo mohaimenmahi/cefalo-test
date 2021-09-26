@@ -2,6 +2,8 @@ import React, { useEffect } from "react";
 import WishItemCard from "./view/listItemCard";
 import Button from "@mui/material/Button";
 
+import Menubar from "../../components/Menubar";
+
 import { connect } from "react-redux";
 
 import {
@@ -13,7 +15,7 @@ import {
 import "../../assets/styles/home.css";
 
 const Wishlist = (props) => {
-  let { removeItem, clearWishlist, wishlist, loading, getWishlist } = props;
+  let { removeItem, clearWishlist, wishlist, getWishlist } = props;
 
   useEffect(() => {
     getWishlist();
@@ -31,21 +33,24 @@ const Wishlist = (props) => {
   });
 
   return (
-    <div className="main">
-      <div className="title-section">
-        <h4>{wishlist.length ? wishlist.length : "No"} items in wishlist</h4>
-        {wishlist.length ? (
-          <Button variant="contained" onClick={clearWishlist}>
-            Clear All
-          </Button>
-        ) : null}
+    <>
+      <Menubar />
+      <div className="main">
+        <div className="title-section">
+          <h4>{wishlist.length ? wishlist.length : "No"} items in wishlist</h4>
+          {wishlist.length ? (
+            <Button variant="contained" onClick={clearWishlist}>
+              Clear All
+            </Button>
+          ) : null}
+        </div>
+        <div className="wishlist">
+          {listItems.map((item) => (
+            <WishItemCard item={item} remove={removeItem} />
+          ))}
+        </div>
       </div>
-      <div className="wishlist">
-        {listItems.map((item) => (
-          <WishItemCard item={item} remove={removeItem} />
-        ))}
-      </div>
-    </div>
+    </>
   );
 };
 

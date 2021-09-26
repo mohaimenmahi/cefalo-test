@@ -13,7 +13,7 @@ function App(props) {
   let { token } = props;
   return (
     <React.Fragment>
-      <MenuBar />
+      {/* <MenuBar /> */}
       <AuthMain />
       <Switch>
         <Route exact path="/" component={Home} />

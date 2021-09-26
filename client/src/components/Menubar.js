@@ -31,6 +31,7 @@ const MenuBar = (props) => {
     openModal,
     logOut,
     clearLogout,
+    text,
   } = props;
 
   let history = useHistory();
@@ -39,7 +40,7 @@ const MenuBar = (props) => {
 
   const [anchorEl, setAnchorEl] = useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
-  let [searchText, setSearchText] = useState("");
+  let [searchText, setSearchText] = useState(text ? text : "");
 
   let handleLogin = () => {
     handleMobileMenuClose();
