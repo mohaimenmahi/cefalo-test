@@ -6,6 +6,13 @@ export function getWishlist() {
   };
 }
 
+export function setClicked(data) {
+  return {
+    type: WISHLIST.SET_CLICKED,
+    data,
+  };
+}
+
 export function addWishlist(data) {
   return {
     type: WISHLIST.ADD_WISHLIST.MAIN,

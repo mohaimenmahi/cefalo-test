@@ -10,6 +10,7 @@ let initState = {
   removeErr: null,
   clearLoading: false,
   clearErr: null,
+  isClicked: "",
 };
 
 export default function wishlistReducer(state = initState, action) {
@@ -34,6 +35,12 @@ export default function wishlistReducer(state = initState, action) {
         ...state,
         wishlistLoading: false,
         wishlistErr: action.result,
+      };
+
+    case WISHLIST.SET_CLICKED:
+      return {
+        ...state,
+        isClicked: action.data,
       };
 
     case WISHLIST.ADD_WISHLIST.MAIN:

@@ -4,6 +4,7 @@ import ProductCard from "../../components/ProductCard";
 import { useLocation } from "react-router-dom";
 
 import { searchResult } from "../../redux/actions/home";
+import { isExist } from "../../helpers/globalFunc";
 
 import "../../assets/styles/home.css";
 
@@ -12,7 +13,7 @@ function useQuery() {
 }
 
 const Search = (props) => {
-  let { searchResult, loading, searchData } = props;
+  let { searchResult, loading, searchData, wishlist } = props;
 
   let query = useQuery();
 
@@ -40,9 +41,10 @@ const Search = (props) => {
           <h4 className="heading">Search Result of {text}</h4>
           <div className="product-list">
             {products.map((item) => {
+              let isListed = isExist(wishlist, item._id);
               return (
                 <div className="card-single">
-                  <ProductCard product={item} />
+                  <ProductCard product={item} isListed={isListed} />
                 </div>
               );
             })}
