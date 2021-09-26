@@ -170,6 +170,7 @@ const SignUp = (props) => {
 
   useEffect(() => {
     if (token) {
+      localStorage.setItem("authToken", token);
       setSuccess("Signed In Successfully");
       TimerMixin.setTimeout(() => {
         handleClose();

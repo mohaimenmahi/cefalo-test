@@ -1,10 +1,9 @@
 import axios from "axios";
 import config from "../config";
 
-const authToken = localStorage.getItem("authToken");
-
 function getIRequestProp() {
   let serverUrl = config.BASE_URL;
+  const authToken = localStorage.getItem("authToken");
   return {
     serverUrl: serverUrl,
     requestHeader: {

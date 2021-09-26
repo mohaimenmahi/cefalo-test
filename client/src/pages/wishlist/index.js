@@ -34,9 +34,11 @@ const Wishlist = (props) => {
     <div className="main">
       <div className="title-section">
         <h4>{wishlist.length ? wishlist.length : "No"} items in wishlist</h4>
-        <Button variant="contained" onClick={clearWishlist}>
-          Clear All
-        </Button>
+        {wishlist.length ? (
+          <Button variant="contained" onClick={clearWishlist}>
+            Clear All
+          </Button>
+        ) : null}
       </div>
       <div className="wishlist">
         {listItems.map((item) => (

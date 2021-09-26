@@ -8,13 +8,14 @@ import { Button, CardActionArea, CardActions } from "@mui/material";
 import FavoriteIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import FavoriteFillIcon from "@mui/icons-material/FavoriteOutlined";
 
-import { addWishlist } from "../redux/actions/wishlist";
+import { addWishlist, removeWishlist } from "../redux/actions/wishlist";
 import { openModal } from "../redux/actions/auth";
 
 import { connect } from "react-redux";
 
 const ProductCard = (props) => {
-  let { product, token, openModal, addWishlist, isListed } = props;
+  let { product, token, openModal, addWishlist, isListed, removeWishlist } =
+    props;
 
   let handleAdd = () => {
     if (token) {
@@ -26,6 +27,21 @@ const ProductCard = (props) => {
     } else {
       openModal("login");
     }
+  };
+
+  let handleRemove = () => {
+    if (isListed) {
+      let data = {
+        id: isListed._id,
+      };
+
+      removeWishlist(data);
+    }
+  };
+
+  let handleClick = () => {
+    if (isListed) handleRemove();
+    else handleAdd();
   };
 
   return (
@@ -47,7 +63,7 @@ const ProductCard = (props) => {
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <IconButton aria-label="add to favorites" onClick={handleAdd}>
+        <IconButton aria-label="add to favorites" onClick={handleClick}>
           {isListed ? <FavoriteFillIcon /> : <FavoriteIcon />}
         </IconButton>
       </CardActions>
@@ -65,6 +81,7 @@ let dispatchToProps = (dispatch) => {
   return {
     openModal: (data) => dispatch(openModal(data)),
     addWishlist: (data) => dispatch(addWishlist(data)),
+    removeWishlist: (data) => dispatch(removeWishlist(data)),
   };
 };
 

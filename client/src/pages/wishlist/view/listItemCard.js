@@ -4,8 +4,6 @@ import CardContent from "@mui/material/CardContent";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/DeleteOutlineOutlined";
 
-import { isExist } from "../../../helpers/globalFunc";
-
 import "../../../assets/styles/home.css";
 
 const WishItemCard = (props) => {

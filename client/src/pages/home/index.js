@@ -9,8 +9,6 @@ const Home = (props) => {
   let { allProducts, loading, wishlist } = props;
   let products = allProducts ? allProducts : [];
 
-  console.log("Wishlist", wishlist);
-
   return (
     <div className="main">
       {loading ? (

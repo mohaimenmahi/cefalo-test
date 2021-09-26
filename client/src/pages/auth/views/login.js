@@ -61,6 +61,7 @@ const Login = (props) => {
 
   useEffect(() => {
     if (token) {
+      // localStorage.setItem("authToken", token);
       handleClose();
     }
   }, [token]);
