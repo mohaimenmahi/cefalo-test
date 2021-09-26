@@ -21,6 +21,8 @@ wishlistSchema.statics.addToWishlist = async (data, userId, cb) => {
       userId: userId,
     });
 
+    addNew = await addNew.populate({ path: "productId" }).execPopulate();
+
     if (addNew) {
       return cb(200, null, addNew);
     } else {

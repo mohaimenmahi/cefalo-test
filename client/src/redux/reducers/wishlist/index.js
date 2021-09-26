@@ -45,13 +45,13 @@ export default function wishlistReducer(state = initState, action) {
 
     case WISHLIST.ADD_WISHLIST.SUCCESS:
       let newItem = action.result;
-      // let newList = [...state.wishlist];
+      let newList = [...state.wishlist];
 
-      // newList.push(newItem);
+      newList.push(newItem);
 
       return {
         ...state,
-        wishlist: newItem,
+        wishlist: newList,
         addLoading: false,
       };
 
@@ -72,13 +72,13 @@ export default function wishlistReducer(state = initState, action) {
     case WISHLIST.REMOVE_WISHLIST.SUCCESS:
       let remove = action.result;
 
-      // let removeList = state.wishlist.filter((item) => item._id !== remove.id);
+      let removeList = state.wishlist.filter((item) => item._id !== remove.id);
 
       return {
         ...state,
         removeLoading: false,
         removeErr: null,
-        wishlist: remove,
+        wishlist: removeList,
       };
 
     case WISHLIST.REMOVE_WISHLIST.FAILURE:
