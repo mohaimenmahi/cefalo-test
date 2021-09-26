@@ -25,10 +25,10 @@ This application is developed by using MERN stack. Here is the detail overview o
 
 Forntend:
 
-  - ReactJs
-  - Material UI
-  - React Redux
-  - Redux Saga
+  - Frontend Library: ReactJs
+  - UI Library: Material UI
+  - State Management Library: React Redux
+  - State Management Middlewre: Redux Saga
   
 Backend:
 
