@@ -86,7 +86,7 @@
 
 @media (max-width: 399px) {
   .card-single {
-    margin: 2px;
+    margin: 12px 0;
   }
 
   .title-section {
