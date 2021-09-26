@@ -14,16 +14,19 @@ const Home = (props) => {
       {loading ? (
         "Loading..."
       ) : (
-        <div className="product-list">
-          {products.map((item) => {
-            let isListed = isExist(wishlist, item._id);
-            return (
-              <div className="card-single">
-                <ProductCard product={item} isListed={isListed} />
-              </div>
-            );
-          })}
-        </div>
+        <>
+          <h4>Featured Products</h4>
+          <div className="product-list">
+            {products.map((item) => {
+              let isListed = isExist(wishlist, item._id);
+              return (
+                <div className="card-single">
+                  <ProductCard product={item} isListed={isListed} />
+                </div>
+              );
+            })}
+          </div>
+        </>
       )}
     </div>
   );
