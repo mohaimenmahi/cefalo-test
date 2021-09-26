@@ -18,3 +18,22 @@ Frontend:
   - with terminal or bash, go to client/ directory from root of the project directory: `cd client`
   - installing dependencies: `yarn install`
   - running application: `yarn start`
+
+# Stacks
+
+This application is developed by using MERN stack. Here is the detail overview of stacks
+
+Frontend Library: ReactJs
+UI Library: Material UI
+State Management: React Redux
+Redux Middleware: Redux Saga
+
+Backed Environment: NodeJs
+Middleware: Express
+Database: MongoDB
+Database ODM: Mongoose
+
+CDN for Images: Cloudinary
+Database Cloud: MongoDB Atlas
+
+
